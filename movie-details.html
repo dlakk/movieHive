@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="details.css" />
+    <script
+      src="https://kit.fontawesome.com/eb6f5be20f.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>MovieHive</title>
+  </head>
+  <body>
+    <header>
+      <div class="nav-left">
+        <h2>mo<span>v</span>ie<span>H</span>ive</h2>
+        <nav class="nav-bar">
+          <ul>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="">Movies</a></li>
+            <li><a href="">Shows</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="nav-right">
+        <form
+          a[]ction="search.html"
+          method="post"
+          class="search-container"
+          id="serch-form"
+        >
+          <input
+            type="text"
+            name=""
+            id="search-input"
+            placeholder="movies or person..."
+          />
+          <a href="">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </a>
+        </form>
+        <button class="auth">Sighn up</button>
+      </div>
+    </header>
+    <!-- header end  -->
+
+    <!-- main section -->
+    <div id="movie-details-container">
+      <div class="movie-details">
+        <img id="movie-poster" alt="Movie Poster" />
+        <div class="movie-des">
+          <div class="title-rating">
+            <h1 id="movie-title">Movie Title</h1>
+            <span><i class="fa-solid fa-star" id="movie-rating"></i></span>
+          </div>
+          <div class="movie-profile">
+            <p class="PG"><span id="movie-pg"></span></p>
+            <p>
+              <span id="release-date"></span>
+            </p>
+            <ul id="movie-genres"></ul>
+            <p id="movie-time"></p>
+          </div>
+          <div class="movie-preference">
+            <i class="fa-solid fa-list icons" title="Add to list"></i>
+            <i class="fa-solid fa-heart icons" title="Mark as favourite"></i>
+            <i class="fa-solid fa-bookmark icons" title="Add to watchlist"></i>
+            <i class="fa-solid fa-play icons"></i><span>Play Trailer</span>
+          </div>
+          <div class="movie-overview">
+            <h2>overview</h2>
+            <hr />
+            <p id="movie-overview"></p>
+          </div>
+          <div class="rating">
+            <p>How do you rate this?</p>
+            <input type="radio" name="rating" id="rating5" value="1" />
+            <label for="rating5" class="fa fa-star"></label>
+
+            <input type="radio" name="rating" id="rating4" value="2" />
+            <label for="rating4" class="fa fa-star"></label>
+
+            <input type="radio" name="rating" id="rating3" value="3" />
+            <label for="rating3" class="fa fa-star"></label>
+
+            <input type="radio" name="rating" id="rating2" value="4" />
+            <label for="rating2" class="fa fa-star"></label>
+
+            <input type="radio" name="rating" id="rating1" value="5" />
+            <label for="rating1" class="fa fa-star"></label>
+            <p id="feedback"></p>
+          </div>
+          <div class="movie-socials">
+            <a
+              href="#"
+              id="facebook-link"
+              title="Visit Facebook"
+              data-tooltip="Visit Facebook"
+              target="_blank"
+            >
+              <i class="fa-brands fa-facebook icons"></i>
+            </a>
+            <a
+              href="#"
+              id="twitter-link"
+              title="Visit Twitter"
+              data-tooltip="Visit Twitter"
+              target="_blank"
+            >
+              <i class="fa-brands fa-twitter icons"></i>
+            </a>
+            <a
+              href="#"
+              id="instagram-link"
+              title="Visit Instagram"
+              data-tooltip="Visit Instagram"
+              target="_blank"
+            >
+              <i class="fa-brands fa-instagram icons"></i>
+            </a>
+            <a
+              href="#"
+              id="homepage-link"
+              title="Visit Homepage"
+              data-tooltip="Visit Homepage"
+              target="_blank"
+            >
+              <i class="fa-solid fa-link icons"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="movie-cast">
+        <h1>Top Billed Cast</h1>
+        <div id="movie-cast" class="cast-container"></div>
+        <button id="to-cast">
+          Full Cast<i class="fa-solid fa-arrow-turn-up icons"></i>
+        </button>
+      </div>
+    </div>
+    <section id="related-movies-section">
+      <h1>Related Movies</h1>
+      <div id="related-movies-container" class="related-movies"></div>
+    </section>
+
+    <!-- main end  -->
+     <!-- footer -->
+     <footer class="footer">
+      <div class="socials">
+        <a href="https://www.fa-facebook.com"><i class="fa-brands fa-facebook icons"></i></a>
+        <a href="https://www.instagram.com"><i class="fa-brands fa-instagram icons"></i></a>
+        <a href="https://www.gmail.com"><i class="fa-brands fa-square-google-plus icons"></i></a>
+        <a href="https://www.github.com"><i class="fa-brands fa-github icons"></i></a>
+      </div>
+      <div class="footer-nav">
+        <ul>
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="">Movies</a></li>
+          <li><a href="">Tv shows</a></li> 
+          <li><a href=""></a></li> 
+        </ul>
+      </div>
+      <div class="footerbottom">
+        <p>Copyrity &copy;2024 Designed by <span class="designer">Alvyn</span>.</p>
+      </div>
+      </footer>
+    <script src="details.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Results</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Your styles -->
+</head>
+<body>
+
+  <h1>Search Results</h1>
+  <div id="search-results"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      // Get the search query from the URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const query = urlParams.get('query');
+      
+      if (!query) {
+        document.getElementById('search-results').innerHTML = "No search query provided.";
+        return;
+      }
+
+      // Fetch movie results based on the query
+      const fetchMovies = async (searchQuery) => {
+        const apiKey = '5e5b8093e7d7736405fb91d83905aaab'; // Your API key
+        try {
+          const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(searchQuery)}`);
+          const data = await res.json();
+          return data.results;
+        } catch (error) {
+          console.error("Error fetching search results:", error);
+          return [];
+        }
+      };
+
+      const displayMovies = async (movies) => {
+        const searchResults = document.getElementById("search-results");
+        if (movies.length === 0) {
+          searchResults.innerHTML = "No movies found for your search.";
+          return;
+        }
+
+        const moviesHTML = movies.map(movie => `
+          <div class="movie">
+            <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+            <div class="movie-info">
+              <h3>${movie.title}</h3>
+              <p><i class="fa-solid fa-star"></i> ${movie.vote_average}</p>
+              <p>${movie.overview}</p>
+              <a href="https://www.themoviedb.org/movie/${movie.id}" target="_blank">More Info</a>
+            </div>
+          </div>
+        `).join("");
+
+        searchResults.innerHTML = moviesHTML;
+      };
+
+      // Fetch and display movies based on the query
+      const movies = await fetchMovies(query);
+      displayMovies(movies);
+    });
+  </script>
+
+</body>
+</html>
