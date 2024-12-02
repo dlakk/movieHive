@@ -43,7 +43,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       const res = await fetch (`https://api.themoviedb.org/3/movie/${categoryId}?api_key=5e5b8093e7d7736405fb91d83905aaab`)
       const data = await res.json();
-      // console.log(data);
       return data.results.slice(0,10);
       
     } catch (error) {
@@ -102,8 +101,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div class="movie">
               <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" data-id="${movie.id}">
               <div class="movie-info">
+              <p><i class="fa-solid fa-star"></i>${movie.vote_average.toFixed(1)}</p>
               <h3>${movie.title}</h3>
-              <p><i class="fa-solid fa-star"></i>${movie.vote_average}</p>
               </div>
             </div>
           `).join("")}
