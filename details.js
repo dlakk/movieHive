@@ -57,6 +57,45 @@ document.addEventListener("DOMContentLoaded", async () => {
     const pgRating = data.adult ? "🔞" : "👨‍👩‍👧‍👦";
     document.getElementById("movie-pg").innerHTML = pgRating;
 
+    // feedback on ratings
+    const ratingInputs = document.querySelectorAll('input[name="rating"]');
+    const feedback = document.getElementById("feedback");
+
+  ratingInputs.forEach((input) =>{ 
+    input.addEventListener("change", (event) => {
+      const rating = event.target.value; // Get selected rating value
+
+      // Display feedback based on rating
+      if (rating == 5) {
+        feedback.textContent = "I love it🥰";
+      } else if (rating == 4) {
+        feedback.textContent = "I like it😊";
+      } else if (rating == 3) {
+        feedback.textContent = "I somewhat like it🤗";
+      } else if (rating == 2) {
+        feedback.textContent = "It's okay🙂";
+      } else if (rating == 1) {
+        feedback.textContent = "I don't like it😑";
+      }
+      feedback.classList.add("visible");
+      ratingInputs.forEach((input) => {
+        input.disabled = true;
+      });
+      // setTimeOut to remove the rating feedback and add an appreciation 
+      setTimeout(() => {
+        feedback.textContent = "Thanks for rating!";
+        
+        setTimeout(() => {
+          feedback.classList.remove("visible");
+          setTimeout(()=>{
+            feedback.textContent = ""; 
+          },1000);
+        }, 3000); 
+      }, 3000);
+    
+    });
+  });
+
     // Social Links
     const externalIds = data.external_ids || {};
     const facebookLink = document.getElementById("facebook-link");
@@ -136,12 +175,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         <div class="related-movie" data-id="${movie.id}">
           <img src="https://image.tmdb.org/t/p/w185${
             movie.poster_path || ""
-          }" alt="${movie.title}"  class="related-img">
-          <div class="movie-info>
-          <p class="movie-rate"><i class="fa-solid fa-star"></i>${
-            movie.vote_average
-          }</p>
-          <p class="movie-title">${movie.title}</p>
+          }" alt="${movie.title}">
+          <div class="movie-info">
+          <p class=""><i class="fa-solid fa-star"></i>${movie.vote_average.toFixed(1)}</p>
+          <h3>${movie.title}</h3>
           
           </div>
         </div>

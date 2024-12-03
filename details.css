@@ -201,7 +201,8 @@
 
 .movie-cast h1 {
   font-size: 24px;
-  padding-left: 5px;
+  position: relative;
+  padding-left: 10px;
 }
 
 .cast-container {
@@ -267,6 +268,18 @@
   color: #fff;
   padding: 2px;
 }
+.movie-cast h1::before,
+#related-movies-section h1::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -2px;
+  height: 100%;
+  width: 5px; 
+  background-color: red;
+  z-index: 10;
+
+}
 
 /* Related Movies */
 #related-movies-section {
@@ -278,58 +291,84 @@
 
 #related-movies-section h1 {
   font-size: 24px;
-  padding-left: 5px;
+  padding: 0 0 5px 10px;
+  position: relative;
 }
 
 .related-movies {
+  position: relative;
   display: flex;
-  gap: 20px;
+  gap: 15px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  align-items: center;
+  width: 100vw;
 
 }
+
+/* Hide scrollbars */
+.related-movies::-webkit-scrollbar {
+  display: none;
+}
+
+.related-movies {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 
 .related-movie {
-  background-color: #ec1212bd;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  display: inline-block;
   position: relative;
-  width: 100%;
-  text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
-  cursor: pointer;
-}
-
-.related-movie:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.related-img {
+  background-color: #f10b0bb4;
+  height: fit-content;
+  width: fit-content;
   border-radius: 10px;
+  box-sizing: border-box
+}
+.related-movie img {
+  display: block;
+  width: 255px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;;
 }
 
 .movie-info {
+  text-align: center;
   padding: 10px;
-  color: #222;
+  
 }
 
-.movie-title {
-  font-size: 16px;
+.movie-info h3 {
+  font-size: 14px;
   font-weight: bold;
-  margin: 0;
+  margin: 5px 0;
   color: #222;
+  flex-wrap: wrap;
+
 }
 
 .movie-info p {
-  font-size: 14px;
-  color: #0a0a0a;
+  position: absolute;
+  /* bottom: 13%; */
+  /* right: 10px; */
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  padding: 5px;
+}
+.related-movie img,
+.related-movie .movie-info p {
+  transition: transform 0.3s ease;
+}
+.related-movie:hover img,
+.related-movie:hover .movie-info p {
+  transform: scale(0.8);
 }
 
-.movie-info .movie-rate .fa-solid.fa-star {
-  font-size: 30px;
-  color: #f30303;
-}
+
 
 /* Responsiveness */
 @media  screen and (max-width: 678px) {

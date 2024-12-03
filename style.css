@@ -241,29 +241,29 @@ header {
 
 }
 #hero-slide .slide{
-  position: absolute;
-  inset: 0 0 0 0;
-  /* z-index: 1; */
+  position: relative;
+ width: 100vw;
+ height: 100vh;
+  z-index: 1;
+}
+#hero-slide .slide::before{
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.4); 
+z-index: 2;
 }
 #hero-slide .slide img{
   width: 100%;
   height:100% ;
-  /* opacity: 0.8; */
-  /* z-index: -1; */
+  opacity: 1;
   object-fit:cover;
   background-position: center;
 }
-.hero-section::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 0;
- 
-}
+
 #hero-slide .slide .content{
   position: absolute;
   top: 15%;
@@ -273,10 +273,9 @@ header {
   transform: translateX(-50%);
   padding-left: 30px;
   box-shadow: 0 5px 10px #0004;
-  /* background-color: #030303d8; */
   margin: 20px;
-  /* z-index: 1; */
-  /* height: 35%; */
+  z-index: 4;
+
 }
 #hero-slide .slide .content .title{
   background-color: rgba(0, 0, 0, 0.151);
@@ -293,22 +292,22 @@ header {
 #hero-slide .slide .genre{
   font-weight: 800;
   font-size: 1rem;
-  color: #130a0a;
-  text-shadow: 1px 1px 2px white ;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px red ;
   margin: 10px 0 5px 0;
 }
 #hero-slide .slide .overview{
   font-size: 18px;
   font-weight: 600;
-  color: #ffffff; /* White text */
+  color: #ffffff; 
   text-shadow: 1px 1px 2px black; 
 }
 .trailer{
   display: flex;
-  flex-direction: column; /* Stacks the children vertically */
+  flex-direction: column; 
   justify-content: center;
-  align-items: center; /* Centers the children horizontally */
-  padding: 10px; /* Optional, to add some space around the content */
+  align-items: center; 
+  padding: 10px; 
   text-align: center; 
 }
 .trailer p{
@@ -323,20 +322,20 @@ header {
   justify-content: center;
   align-items: center;
   padding: 10px;
-  background-color: #ff0000; /* Orange background for the play button */
+  background-color: #ff0000; 
   border-radius: 5px;
   text-decoration: none;
   color: white;
   transition: background-color 0.3s ease;
 }
 .trailer a:hover {
-  background-color: #ebf0e6; /* Darker orange on hover */
+  background-color: #ebf0e6; 
 }
 .trailer a i {
-  margin: 5px; /* Adds space between the icon and the text */
+  margin: 5px;
 }
 .trailer a:focus {
-  outline: none; /* Removes the focus outline for cleaner design */
+  outline: none; 
 }
 .fa-play{
   color: black;
@@ -551,11 +550,40 @@ header {
 }
 @media  screen and (max-width: 678px) {
   .hero-section #hero-slide .slide .content{
-    padding-right: 0;
+    top: 10%;
+    left: 40%;
+  
   }
   .hero-section #hero-slide .slide .content .title{
-    font-size: 30px;
+    font-size: 24px;
+    letter-spacing: 2px
   }
+  .hero-section #hero-slide .slide .overview {
+    font-size: 16px;
+  }
+}
+@media  screen and (max-width: 480px) {
+  .hero-section #hero-slide .slide .content{
+    top: 15%;
+    left: 40%;
+  
+  }
+  .hero-section #hero-slide .slide .content .title{
+    font-size: 21px;
+    letter-spacing: 1px
+  }
+  .hero-section #hero-slide .slide .content .genre{
+    font-size: 12px;
+  }
+  .hero-section #hero-slide .slide .overview {
+    font-size: 14px;
+  }
+  .hero-section #hero-slide .slide .content .trailer{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+  }
+  
 }
 
 /* movie category */
@@ -564,61 +592,71 @@ header {
   padding: 20px;
 
 }
-.movie-category h2{
-font-size: 24px;
-margin-bottom: 10px;
-
+/* Ensure movie category has a relative position for proper alignment of pseudo-element */
+.movie-category {
+  position: relative;
+  margin-bottom: 40px;
+  overflow: visible;
 }
-.movies{
+
+.movie-category h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+.movie-category h2::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -2px;
+  height: 8%; 
+  width: 5px; 
+  background-color: red;
+  z-index: 10;
+}
+
+/* Flex container for horizontal scrolling */
+.movies {
   position: relative;
   display: flex;
   gap: 15px;
-  align-items: center;
-  justify-content: center;
-  overflow-x: scroll;
-  white-space: nowrap;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-
+  width: 100%;
 }
+
 /* Hide scrollbars */
 .movies::-webkit-scrollbar {
-  display: none; 
+  display: none;
 }
-.movies{
+
+.movies {
   -ms-overflow-style: none;
-   scrollbar-width: none; 
+  scrollbar-width: none;
 }
-.movie{
+
+/* Movie item styling */
+.movie {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
   display: inline-block;
   position: relative;
   background-color: #f10b0bb4;
   height: fit-content;
   width: fit-content;
-  border-radius:10px ;
-
+  border-radius: 10px;
+  box-sizing: border-box;
 }
+
 .movie img{
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   width: 240px;
-  
   border-radius: 10px;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
-.movie-category .movies .movie:first-child {
-  position: relative;
-}
-.movie-category .movies .movie:first-child::before{
-  content: ''; /* Create an empty pseudo-element */
-  position: absolute;
-  top: 0;
-  left: -10px; /* Adjust the left position to control the line's spacing */
-  height: 100%;
-  width: 5px; /* Width of the vertical line */
-  background-color: black; /* Color of the vertical line */
-}
+
 
 .movie-info{
   text-align: center;
@@ -634,7 +672,7 @@ margin-bottom: 10px;
  
 }
 .movie-info h3{
-  margin: 10px;
+  margin: 5px 0;
 }
 .movie img,
 .movie .movie-info p {
