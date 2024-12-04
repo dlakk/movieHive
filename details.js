@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const minutes = runtime % 60;
     document.getElementById("movie-time").textContent = `${hours}h ${minutes}m`;
     document.getElementById("movie-rating").textContent =
-      data.vote_average || "N/A";
+      data.vote_average.toFixed(1) || "N/A";
     document.getElementById("release-date").textContent =
       data.release_date || "Unknown";
 
@@ -122,14 +122,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Populate Cast
     const castContainer = document.getElementById("movie-cast");
-    const castMembers = data.credits.cast.slice(0, 8);
+    const castMembers = data.credits.cast.slice(0, 7);
     castContainer.innerHTML = castMembers
       .map(
         (member) => `
       <div class="cast-member">
         <img src="https://image.tmdb.org/t/p/w185${
           member.profile_path || ""
-        }" alt="${member.name}" class="cast-img" data-name="${member.name}">
+        }" alt="${member.name}" 
+        loading="lazy"
+        class="cast-img" data-name="${member.name}">
         <p>${member.name}</p>
       </div>
     `
@@ -175,7 +177,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         <div class="related-movie" data-id="${movie.id}">
           <img src="https://image.tmdb.org/t/p/w185${
             movie.poster_path || ""
-          }" alt="${movie.title}">
+          }" alt="${movie.title}"
+          loading="lazy">
           <div class="movie-info">
           <p class=""><i class="fa-solid fa-star"></i>${movie.vote_average.toFixed(1)}</p>
           <h3>${movie.title}</h3>

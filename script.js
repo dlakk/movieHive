@@ -26,7 +26,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     { id: "top_rated", name: "Top Rated" },
     { id: "upcoming", name: "Upcoming" },
   ];
+  const authBtn = document.getElementsByClassName("auth");
 
+  if (authBtn) {
+    authBtn.addEventListener("click", () => {
+      // Redirect to full-cast.html with the movie ID as a query parameter
+      window.location.href = "login.html";
+    });
+  }
   const slideContainer = document.getElementById("hero-slide");
   const thumbnailSlider = document.getElementById("thumbnail-slide");
 

@@ -4,11 +4,22 @@
   justify-content: center;
   gap: 20px;
   position: relative;
+  flex-wrap: wrap;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   padding: 20px;
   color: #fff;
+  margin-top:-100px ;
+  opacity: 0; /* Initially invisible */
+  transform: translateY(20px); /* Slightly shifted down */
+  animation: fadeIn 1s ease-out forwards;
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .movie-details::before {
@@ -24,11 +35,18 @@
 
 .movie-details img {
   position: relative;
-  width: 489px;
-  height: 630px;
+  width: 100%;
+  height: auto;
+  max-width: 300px;
   border-radius: 15px;
-  margin-left: 40px;
-  padding: 20px;
+  margin-top:100px;
+  padding: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+.movie-details img:hover {
+  transform: scale(1.05); 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .movie-des {
@@ -36,23 +54,39 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 100%;
+  max-width: 600px;
   margin: 10px;
+  margin-top:100px;
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: slideIn 1s ease-out forwards;
+  animation-delay: 0.5s;
+}
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .movie-des .title-rating {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
 }
 
 .movie-profile {
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 2px;
+  width: 100%;
 }
 
 .movie-profile ul {
   display: flex;
-  gap: 10px;
+  gap: 5px;
   padding-left: 5px;
   list-style-type: none;
 }
@@ -97,7 +131,7 @@
   z-index: 10;
   visibility: visible;
   opacity: 1;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .movie-overview {
@@ -193,7 +227,7 @@
   background-color: #fff;
   color: red;
 }
-
+/* Cast */
 .movie-cast {
   margin: 10px;
   padding: 10px;
@@ -204,20 +238,28 @@
   position: relative;
   padding-left: 10px;
 }
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
 
 .cast-container {
+ position: relative;
   display: flex;
   gap: 20px;
-  padding:5px;
-  justify-content: flex-start;
-  position: relative;
+  
 }
+
 
 .cast-member {
   text-align: center;
   width: 150px;
   background-color: #ec1212bd;
   border-radius: 20px;
+  margin: 10px 0 10px ;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 10px;
   cursor: pointer;
@@ -234,6 +276,7 @@
   border-radius: 10px;
   width: 100%;
   height: auto;
+  background-color: #ccc;
 }
 
 .cast-member p {
@@ -241,26 +284,37 @@
 }
 
 #to-cast {
-  margin-top: 10px;
-  position: absolute;
-  right: 1%;
-  bottom: -23%;
-  text-decoration: none;
-  color: red;
-  font-weight: bold;
-  background-color: transparent;
-  border: 1px solid #fff;
-  outline: none;
-  padding: 10px;
-  border-radius: 15px;
-  font-size: 20px;
+  color: hsl(0, 85%, 51%);
+  border: none;
+  background: transparent;
+  width: 100px;
+  height: 50px;
+  border-radius: 20px;
+  font-size: 15px;
+  padding: 5px;
+  font-weight: 700;
   cursor: pointer;
-  transition: color 0.3s, background-color 0.3s;
+  text-transform: uppercase;
+  transition: color 0.5s, background-color 0.5s;
+  animation: bounce 2s infinite; /* Bouncing animation */
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
 }
 
 #to-cast:hover {
   background-color: #ff0000c5;
   color: black;
+
 }
 
 #to-cast .icons {
@@ -325,6 +379,7 @@
   background-color: #f10b0bb4;
   height: fit-content;
   width: fit-content;
+  margin: 10px;
   border-radius: 10px;
   box-sizing: border-box
 }
@@ -371,6 +426,35 @@
 
 
 /* Responsiveness */
-@media  screen and (max-width: 678px) {
-  
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .movie-details {
+    flex-direction: column; /* Stack content vertically */
+    margin-top: 0;
+  }
+
+  .movie-details img {
+    max-width: 100%; /* Adjust image size for smaller screens */
+    margin-bottom: 20px;
+  }
+
+  .movie-des {
+    align-items: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .movie-details {
+    padding: 10px;
+  }
+
+  .movie-details img {
+    max-width: 90%; 
+  }
+
+  .movie-des .title-rating {
+    flex-direction: column;
+    text-align: center;
+  }
 }
