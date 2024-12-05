@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         "https://api.themoviedb.org/3/trending/movie/week?api_key=5e5b8093e7d7736405fb91d83905aaab"
       );
       const data = await res.json();
-      console.log(data);
+      
       return data.results;
     } catch (error) {
       console.error("Error fetching movies:", error);
@@ -54,6 +54,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       return [];
     }
   };
+
+  
   const fetchVideos = async (movieId) => {
     try {
       const res = await fetch(

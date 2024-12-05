@@ -1,33 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="login.css">
-    <script src="https://kit.fontawesome.com/eb6f5be20f.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="login.css" />
+    <script
+      src="https://kit.fontawesome.com/eb6f5be20f.js"
+      crossorigin="anonymous"
+    ></script>
     <title>MovieHive</title>
   </head>
-<body>
-  <div class="form-container">
-    <div class="form-box login">
-      <form action="" method="post">
-        <h1>login</h1>
-        <div class="input-box">
-          <input type="text" name="" id="" placeholder="Username" required>
+  <body>
+    <div class="form-container" id="container">
+      <div class="form-box sign-in">
+        <form action="" method="post">
+          <h1>Sign In</h1>
+          <div class="input-box">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" name="username" placeholder="Username" required />
+          </div>
+          <div class="input-box">
+            <i class="fa-solid fa-lock"></i>
+            <input
+              type="password"
+              name="passwd"
+              placeholder="Password"
+              required
+            />
+          </div>
+          <div class="forgot-pass">
+            <a href="http://" target="_blank" rel="noopener noreferrer"
+              >Forgot password?</a
+            >
+          </div>
+          <button type="submit" class="btn">Sign In</button>
+          <p>Sign in with social platforms</p>
+          <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-google"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-github"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          </div>
+        </form>
+      </div>
+
+      <div class="form-box sign-up">
+        <form action="" method="post">
+          <h1>Sign Up</h1>
+          <div class="input-box">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" name="username" placeholder="Username" required />
+          </div>
+          <div class="input-box">
+            <i class="fa-solid fa-envelope"></i>
+            <input type="email" name="email" placeholder="Email" required />
+          </div>
+          <div class="input-box">
+            <i class="fa-solid fa-lock"></i>
+            <input
+              type="password"
+              name=""
+              placeholder="Password"
+              required
+            />
+          </div>
+          <button type="submit" class="btn">Sign Up</button>
+          <p>Sign up with social platforms</p>
+          <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-google"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-github"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          </div>
+        </form>
+      </div>
+      <div class="toggle-box">
+        <div class="toggle-panel toggle-left">
+          <h1>Hello, welcome!</h1>
+          <p>Don't have an account?</p>
+          <button class="btn sign-upBtn" id="signUp">Sign Up</button>
         </div>
-        <div class="input-box">
-        <input type="password" name="" id="" placeholder="Password" required>
+        <div class="toggle-panel toggle-right">
+          <h1>Welcome Back!</h1>
+          <p>Already have an account?</p>
+          <button class="btn sign-inBtn" id="signIn">Sign In</button>
         </div>
-      </form>
+      </div>
     </div>
-  </div>
-</body>
+    <script src="sign.js"></script>
+  </body>
 </html>
 
 <!-- tomorrow -->
- <!--
+<!--
  *check redirection to the login page
- *finish the sighn up and login page
+ *finish the sign up and login page
  *find a way to play the trailer on the same page without redirection to youtube
  -->
