@@ -78,6 +78,7 @@ header {
 .search-container {
   height: 30px;
   display: flex;
+  position: relative;
   cursor: pointer;
   padding: 10px 20px;
   background: white;
@@ -94,7 +95,7 @@ header {
   width: 0;
   outline: 0;
   border: 0;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 400;
   transition: 0.8s;
   color: black;
@@ -105,9 +106,67 @@ header {
   font-size: 20px;
   color: black;
 }
+/* suggestions */
+
+#suggestions {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  max-height: 200px;
+  overflow-y: auto;
+  position: absolute;
+  width: 300px;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+font-size: 12px;
+  z-index: 1000;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  padding: 8px;
+  cursor: pointer;
+  color: black;
+}
+.suggestion-item:hover {
+  background-color: #f0f0f0;
+  color: red;
+}
+.suggestion-img{
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.suggestion-item span{
+  color: #666;
+  font: 10px;
+  margin-left: 5px;
+}
+.suggestion-category{
+  font-family: italic;
+  color: red;
+  font-size: 12px;
+  font-weight: bold;
+}
+.suggestion-category, .suggestion-item span{
+  display: inline-block;
+}
+.suggestion-title{
+  color: black;
+  font-size: 14px;
+
+}
+
+/* end of suggestions */
 
 .auth {
-  color: hsl(0, 85%, 51%);
+  color: #ec1818;
   border: none;
   background: transparent;
   width: 100px;
@@ -164,13 +223,11 @@ header {
   }
 
   .search-container {
-    
     width: auto;
-  
-  
-  }
+    position: relative;
+}
 
-  .search-container input {
+.search-container input {
     width: 0;
     outline: 0;
     border: 0;
@@ -179,12 +236,28 @@ header {
     transition: width 0.8s ease;
     color: black;
     background: #fff;
-    
-  
-  }
-  .search-container:hover input {
+}
+
+.search-container:hover input {
     width: 150px;
-  }
+}
+
+#suggestions {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 150px;
+}
+
+.search-container:hover #suggestions {
+    display: block;
+}
+
+
 
   .auth {
     width: auto;
@@ -375,43 +448,7 @@ z-index: 2;
   display: none;
 }
 /* video modal */
-/* Modal styles */
-.video-modal {
-  display: none; /* Hidden by default */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; /* Make sure it's on top */
-}
 
-.modal-content {
-  position: relative;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-#videoIframe {
-  width: 100%;
-  max-width: 800px;
-  height: 450px;
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  color: #fff;
-  font-size: 36px;
-  cursor: pointer;
-}
-
-/* end video modal */
 
 .arrows{
   position: absolute;
