@@ -25,23 +25,15 @@
         </nav>
       </div>
       <div class="nav-right">
-        <form
-          a[]ction="search.html"
-          method="post"
-          class="search-container"
-          id="serch-form"
-        >
-          <input
-            type="text"
-            name=""
-            id="search-input"
-            placeholder="movies or person..."
-          />
-          <a href="">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </a>
-        </form>
-        <button class="auth">Sighn up</button>
+        <form action="search.html" method="post" class="search-container" id="serch-form">
+          <input type="text" id="search-input" placeholder="movies or person...">
+  
+            <a href="">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </a>
+            <div id="suggestions"></div>
+        </form>    
+        <button id="auth" class="auth">Sighn up</button>
       </div>
     </header>
     <!-- header end  -->
@@ -52,7 +44,7 @@
         <img id="movie-poster" alt="Movie Poster" />
         <div class="movie-des">
           <div class="title-rating">
-            <h1 id="movie-title">Movie Title</h1>
+            <h1 id="movie-title"></h1>
             <span><i class="fa-solid fa-star" id="movie-rating"></i></span>
           </div>
           <div class="movie-profile">
@@ -109,7 +101,7 @@
               data-tooltip="Visit Twitter"
               target="_blank"
             >
-              <i class="fa-brands fa-twitter icons"></i>
+            <i class="fa-brands fa-x-twitter icons"></i>
             </a>
             <a
               href="#"
@@ -133,7 +125,7 @@
         </div>
       </div>
 
-      <div class="movie-cast">
+      <div class="movie-cast" id="casting">
         <h1>Top Billed Cast</h1>
         <div class="container">
           <div id="movie-cast" class="cast-container"></div>
@@ -179,6 +171,6 @@
         </p>
       </div>
     </footer>
-    <script src="details.js" defer></script>
+    <script type="module" src="details.js" defer></script>
   </body>
 </html>
