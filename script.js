@@ -37,20 +37,30 @@ export function displaySuggestions(movies, tvShows, people) {
     { type: "TV Show", results: tvShows },
     { type: "Crew", results: people },
   ];
- const radomizeresults = allResults.sort(()=>Math.random() - 0.5);
-  
+  const radomizeresults = allResults.sort(() => Math.random() - 0.5);
 
   radomizeresults.forEach((category) => {
-    if (category.results && Array.isArray(category.results) && category.results.length > 0) {
+    if (
+      category.results &&
+      Array.isArray(category.results) &&
+      category.results.length > 0
+    ) {
       let categoryHTML = `
         <h3>${category.type}</h3>
         ${category.results
           .map((item) => {
-            const releaseYear = item.release_date ? item.release_date.split('-')[0] : '';
-            const posterPath = item.poster_path || item.profile_path || "default-image-path.jpg";  // Add a fallback image path
+            const releaseYear = item.release_date
+              ? item.release_date.split("-")[0]
+              : "";
+            const posterPath =
+              item.poster_path || item.profile_path || "default-image-path.jpg"; // Add a fallback image path
             return `
-              <div class="suggestion-item" data-id="${item.id}" data-type="${category.type === "Movie" ? "movie" : "tv"}">
-                <img class="suggestion-img" src="https://image.tmdb.org/t/p/w92${posterPath}" alt="${item.title || item.name}">
+              <div class="suggestion-item" data-id="${item.id}" data-type="${
+              category.type === "Movie" ? "movie" : "tv"
+            }">
+                <img class="suggestion-img" src="https://image.tmdb.org/t/p/w92${posterPath}" alt="${
+              item.title || item.name
+            }">
                 <div class="suggestion-des">
                   <p class="suggestion-category">${category.type}</p>
                   <span>${releaseYear}</span>
@@ -67,22 +77,26 @@ export function displaySuggestions(movies, tvShows, people) {
   });
 
   suggestions.innerHTML = suggestionsHTML;
-  suggestions.style.display = radomizeresults.some((category) => category.results.length > 0)
+  suggestions.style.display = radomizeresults.some(
+    (category) => category.results.length > 0
+  )
     ? "block"
     : "none";
 
   // Attach event listeners to suggestion items
   document.querySelectorAll(".suggestion-item").forEach((item) => {
     item.addEventListener("click", (event) => {
-      const id = event.target.closest('.suggestion-item').dataset.id;
-      const title = event.target.closest('.suggestion-item').querySelector(".suggestion-title").textContent;
-      const type = event.target.closest('.suggestion-item').dataset.type
+      const id = event.target.closest(".suggestion-item").dataset.id;
+      const title = event.target
+        .closest(".suggestion-item")
+        .querySelector(".suggestion-title").textContent;
+      const type = event.target.closest(".suggestion-item").dataset.type;
       selectSuggestion(title, id, type);
     });
   });
 }
 
-export function selectSuggestion(value, id, type="movie") {
+export function selectSuggestion(value, id, type = "movie") {
   document.getElementById("search-input").value = value;
   document.getElementById("suggestions").style.display = "none";
   if (id) {
@@ -90,15 +104,15 @@ export function selectSuggestion(value, id, type="movie") {
   }
 }
 
-export function login(){
+export function login() {
   const authBtn = document.getElementById("auth");
 
- if (authBtn) {
-   authBtn.addEventListener("click", () => {
-     
-     window.location.href = "login.html";
-   });
- }}
+  if (authBtn) {
+    authBtn.addEventListener("click", () => {
+      window.location.href = "login.html";
+    });
+  }
+}
 
 document.addEventListener("DOMContentLoaded", async () => {
   const genreList = {
@@ -131,18 +145,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     { id: "airing_today", name: "Airing Today (TV Shows)", type: "tv" },
     { id: "upcoming", name: "Upcoming (Movies)", type: "movie" },
     { id: "popular", name: "Popular (TV Shows)", type: "tv" },
-    
   ];
   // Utility function to shuffle an array. this enables different movies in each category
-const shuffleArray = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-};
- 
-  login()
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
+  login();
   const slideContainer = document.getElementById("hero-slide");
   const thumbnailSlider = document.getElementById("thumbnail-slide");
 
@@ -156,11 +169,13 @@ const shuffleArray = (array) => {
   document.getElementById("search-input").addEventListener("input", (e) => {
     fetchSuggestions(e.target.value);
     //hide suggestion and close search bar
-    document.querySelector(".search-container").addEventListener("mouseleave", () => {
-      document.getElementById("search-input").value = ""; 
-      const suggestions = document.getElementById("suggestions");
-      suggestions.style.display = "none";
-    });
+    document
+      .querySelector(".search-container")
+      .addEventListener("mouseleave", () => {
+        document.getElementById("search-input").value = "";
+        const suggestions = document.getElementById("suggestions");
+        suggestions.style.display = "none";
+      });
   });
   const fetchMovies = async () => {
     try {
@@ -169,7 +184,7 @@ const shuffleArray = (array) => {
       );
       const data = await res.json();
 
-      return data.results;
+      return data.results.map(movie => ({ ...movie, type: "movie" }));
     } catch (error) {
       console.error("Error fetching movies:", error);
       return [];
@@ -182,40 +197,46 @@ const shuffleArray = (array) => {
       );
       const data = await res.json();
 
-      return data.results;
+      return data.results.map(tvShow => ({ ...tvShow, type: "tv" }));
     } catch (error) {
       console.error("Error fetching TV shows:", error);
       return [];
     }
-  }
+  };
   const fetchCategories = async (categoryId, type) => {
     try {
       const res = await fetch(
         `https://api.themoviedb.org/3/${type}/${categoryId}?api_key=5e5b8093e7d7736405fb91d83905aaab`
       );
       if (!res.ok) {
-        console.error(`Error fetching ${type} category ${categoryId}:`, res.statusText);
+        console.error(
+          `Error fetching ${type} category ${categoryId}:`,
+          res.statusText
+        );
         return [];
       }
       const data = await res.json();
       if (data.results.length === 0) {
         console.warn(`No results for ${type} category ${categoryId}`);
       }
-      return shuffleArray(data.results.slice(0, 15)); 
+      return shuffleArray(data.results.slice(0, 15));
     } catch (error) {
       console.error("Error fetching category data:", error);
       return [];
     }
   };
 
-  const fetchVideos = async (movieId) => {
+  const fetchVideos = async (id,type) => {
     try {
+  
       const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=5e5b8093e7d7736405fb91d83905aaab`
+        `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=5e5b8093e7d7736405fb91d83905aaab`
       );
       const data = await res.json();
+    
+      //construct the URL from youtube
       return data.results.length > 0
-        ? `https://www.youtube.com/watch?tv=${data.results[0].key}`
+        ? `https://www.youtube.com/embed/${data.results[0].key}`
         : "";
     } catch (error) {
       console.error("Error fetching video:", error);
@@ -225,50 +246,101 @@ const shuffleArray = (array) => {
 
   const generateSlides = async () => {
     const movies = await fetchMovies();
-    const tvShows = await fetchTvShows(); 
-    
-    const combinedItems = [...movies, ...tvShows].sort(() => Math.random() - 0.5);//random display
+    const tvShows = await fetchTvShows();
+  
+    // Combine and shuffle items for random display
+    const combinedItems = [...movies, ...tvShows].sort(
+      () => Math.random() - 0.5
+    );
+  
     const slidesHTML = await Promise.all(
       combinedItems.map(async (item) => {
         const genreNames = item.genre_ids
-          ?item.genre_ids.map((id) => genreList[id] || "Unknown")
-          .join(", "): "Unknown";
-        const videoUrl = await fetchVideos(item.id);
+          ? item.genre_ids.map((id) => genreList[id] || "Unknown").join(", ")
+          : "Unknown";
+        const videoUrl = await fetchVideos(item.id, item.type);
         const title = item.title || item.name;
-        
-        const type = item.title ? "movie" : "tv";  // Check if it's a movie or tv show
-        
+        const type = item.title ? "movie" : "tv"; // Check if it's a movie or tv show
+  
         return `
-        <div class="slide">
-        <img src="https://image.tmdb.org/t/p/w500${item.poster_path}" alt="${title}" data-id="${item.id}" data-type="${type}">
-        <div class="content">
-          <div class="title">${title}</div>
-          <div class="genre">${genreNames}</div>
-          <div class="overview">${item.overview}</div>
-          <div class="trailer">
-          <p>Watch Trailer</p>${videoUrl ? `<a href="${videoUrl}" target="_blank"><i class="fa-solid fa-play"></i></a>` : "Sorry no trailer"}
+          <div class="slide">
+            <img src="https://image.tmdb.org/t/p/w500${item.poster_path}" alt="${title}" data-id="${item.id}" data-type="${type}">
+            <div class="content">
+              <div class="title">${title}</div>
+              <div class="genre">${genreNames}</div>
+              <div class="overview">${item.overview}</div>
+              <div class="trailer">
+                ${
+                  videoUrl
+                    ? `<a href="#" class="video-link" data-video-url="${videoUrl}" data-id="${item.id}" data-type="${type}">Watch Trailer <i class="fa-solid fa-play icons"></i></a>`
+                    : "No trailer available"
+                }
+              </div>
+              <div class="video-container" style="display: none;">
+                <iframe src="" frameborder="0" allowfullscreen autoplay></iframe>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      `;
+        `;
       })
     );
   
+    // Inject slides into DOM
     slideContainer.innerHTML = slidesHTML.join("");
     thumbnailSlider.innerHTML = slidesHTML.join("");
+  
+    // Add event listeners for play icons
+    document.addEventListener("click", async (event) => {
+      if (event.target.classList.contains("video-link")) {
+        event.preventDefault();
+  
+        const link = event.target;
+        const id = link.dataset.id;
+        const type = link.dataset.type; // 'movie' or 'tv'
+        const videoUrl = await fetchVideos(id, type);
+  
+        if (videoUrl) {
+          const contentDiv = link.closest(".content");
+          const videoContainer = contentDiv.querySelector(".video-container");
+          const iframe = videoContainer.querySelector("iframe");
+  
+          iframe.src = videoUrl;
+          videoContainer.style.display = "block"; // Show the iframe
+          contentDiv
+            .querySelectorAll(":scope > *:not(.video-container)")
+            .forEach((child) => {
+              child.style.display = "none"; // Hide all other children
+            });
+        }
+      }
+    });
+  
+    // Close button to restore the original state
+    document.addEventListener("click", (event) => {
+      if (event.target.classList.contains("close-video")) {
+        const videoContainer = event.target.closest(".video-container");
+        const iframe = videoContainer.querySelector("iframe");
+        iframe.src = ""; // Stop the video
+        videoContainer.style.display = "none"; // Hide the iframe
+  
+        const contentDiv = videoContainer.closest(".content");
+        contentDiv.querySelectorAll(":scope > *").forEach((child) => {
+          child.style.display = ""; // Restore visibility of all children
+        });
+      }
+    });
   };
   // Categories
   const displayVideos = async () => {
     const container = document.getElementById("categories-container");
     container.innerHTML = ""; // Clear previous content if any
-  
+
     for (const category of categories) {
       const movies = await fetchCategories(category.id, category.type);
       if (movies.length === 0) {
-      
         continue; // Skip empty categories
       }
-  
+
       const categorySection = document.createElement("div");
       categorySection.classList.add("movie-category");
 
@@ -281,7 +353,9 @@ const shuffleArray = (array) => {
             <div class="movie">
               <img src="https://image.tmdb.org/t/p/w500${
                 movie.poster_path
-              }" alt="${movie.title || movie.name}" data-id="${movie.id}" data-type=${category.type}>
+              }" alt="${movie.title || movie.name}" data-id="${
+                movie.id
+              }" data-type=${category.type}>
               <div class="movie-info">
               <p><i class="fa-solid fa-star"></i>${movie.vote_average.toFixed(
                 1
@@ -307,13 +381,13 @@ const shuffleArray = (array) => {
       });
     });
     //Go to movie-details page
-    const images = document.querySelectorAll('img[data-id]');
-  images.forEach((img) => {
-    img.addEventListener('click', (event) => {
-      const id = event.target.dataset.id;
-      const type = event.target.dataset.type; // 'movie' or 'tv'
-      window.location.href = `movie-details.html?id=${id}&type=${type}`;
-    });
+    const images = document.querySelectorAll("img[data-id]");
+    images.forEach((img) => {
+      img.addEventListener("click", (event) => {
+        const id = event.target.dataset.id;
+        const type = event.target.dataset.type; // 'movie' or 'tv'
+        window.location.href = `movie-details.html?id=${id}&type=${type}`;
+      });
     });
   };
 
