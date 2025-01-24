@@ -3,6 +3,7 @@ import {
   displaySuggestions,
   selectSuggestion,
   login,
+  initializeModalVideo
 } from "./script.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -12,6 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     selectSuggestion(value, id);
   });
   login();
+  initializeModalVideo();
   const movieDetailsContainer = document.getElementById(
     "movie-details-container"
   );

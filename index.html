@@ -1,79 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="style.css">
-  <script src="https://kit.fontawesome.com/eb6f5be20f.js" crossorigin="anonymous"></script>
-  <title>MovieHive</title>
-</head>
-<body>
-  <header>
-    <div class="nav-left">
-      <h2>mo<span>v</span>ie<span>H</span>ive</h2>
-      <nav class="nav-bar">
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="">Movies</a></li>
-          <li><a href="">Shows</a></li>
-        </ul>
-      </nav>
-    </div>
-    <div class="nav-right">
-      <form action="search.html" method="post" class="search-container" id="serch-form">
-        <input type="text" id="search-input" placeholder="movies or person...">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/eb6f5be20f.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>MovieHive</title>
+  </head>
+  <body>
+    <header>
+      <div class="nav-left">
+        <h2>mo<span>v</span>ie<span>H</span>ive</h2>
+        <nav class="nav-bar">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="">Movies</a></li>
+            <li><a href="">Shows</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="nav-right">
+        <form
+          action="search.html"
+          method="post"
+          class="search-container"
+          id="serch-form"
+        >
+          <input
+            type="text"
+            id="search-input"
+            placeholder="movies or person..."
+          />
 
           <a href="">
             <i class="fa-solid fa-magnifying-glass"></i>
           </a>
           <div id="suggestions"></div>
-      </form>    
-      <button id="auth" class="auth">Sighn up</button>
+        </form>
+        <button id="auth" class="auth">Sighn up</button>
+      </div>
+    </header>
+    <!-- Hero section -->
+    <div class="hero-section">
+      <div id="hero-slide"></div>
+      <div id="thumbnail-slide"></div>
+      <!-- modal -->
+      <div id="video-modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <iframe
+            src=""
+            frameborder="0"
+            id="modal-video"
+            width="100%"
+            height="90%"
+            allow="autoplay"
+            allowfullscreen
+          ></iframe>
+          <div id="commentSection">
+          <h3>Your opinions</h3>
+          <div class="comments"><textearea id="commentInput" aria-placeholder="Add a comment"></textearea>
+          <button type="submit" id="submitComment">Post</button>
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="arrows">
+        <button id="prev">
+          <i class="fa-solid fa-circle-arrow-left icon-nav"></i>
+        </button>
+        <button id="next">
+          <i class="fa-solid fa-circle-arrow-right icon-nav"></i>
+        </button>
+      </div>
+      <!-- time running -->
+      <div class="time"></div>
     </div>
-  </header>
-  <!-- Hero section -->
-  <div class="hero-section">
-    <div id="hero-slide" ></div> 
-    <div id="thumbnail-slide" ></div>
-    <div id="video-overlay" class="hidden">
-      <div id="close-video"></div>
-      <iframe src="" frameborder="0" allowfullscreen></iframe>
-    </div>
-    
-    <div class="arrows">
-      <button id="prev"><i class="fa-solid fa-circle-arrow-left icon-nav"></i></button>
-      <button id="next"><i class="fa-solid fa-circle-arrow-right icon-nav"></i></button>
-  </div>
-  <!-- time running -->
-  <div class="time"></div> 
- </div>
-  <!-- End of Hero section -->
-   <!-- Main -->
-   <div id="categories-container"></div>
-  
+    <!-- End of Hero section -->
+    <!-- Main -->
+    <div id="categories-container"></div>
+
     <!-- main end -->
 
     <!-- footer -->
-     <footer class="footer">
+    <footer class="footer">
       <div class="socials">
-        <a href="https://www.fa-facebook.com"><i class="fa-brands fa-facebook icons"></i></a>
-        <a href="https://www.instagram.com"><i class="fa-brands fa-instagram icons"></i></a>
-        <a href="https://www.gmail.com"><i class="fa-brands fa-square-google-plus icons"></i></a>
-        <a href="https://www.github.com"><i class="fa-brands fa-github icons"></i></a>
+        <a href="https://www.fa-facebook.com"
+          ><i class="fa-brands fa-facebook icons"></i
+        ></a>
+        <a href="https://www.instagram.com"
+          ><i class="fa-brands fa-instagram icons"></i
+        ></a>
+        <a href="https://www.gmail.com"
+          ><i class="fa-brands fa-square-google-plus icons"></i
+        ></a>
+        <a href="https://www.github.com"
+          ><i class="fa-brands fa-github icons"></i
+        ></a>
       </div>
       <div class="footer-nav">
         <ul>
           <li><a href="./index.html">Home</a></li>
           <li><a href="">Movies</a></li>
-          <li><a href="">Tv shows</a></li> 
-          <li><a href=""></a></li> 
+          <li><a href="">Tv shows</a></li>
+          <li><a href=""></a></li>
         </ul>
       </div>
       <div class="footerbottom">
-        <p>Copyrity &copy;2024 Designed by <span class="designer">Alvyn</span>.</p>
+        <p>
+          Copyrity &copy;2024 Designed by <span class="designer">Alvyn</span>.
+        </p>
       </div>
-      </footer>
-  <script type="module" src="script.js"></script> 
-</body>
-</html> 
+    </footer>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>

@@ -113,6 +113,99 @@ export function login() {
     });
   }
 }
+// function to pause sliders
+function pauseSliders() {
+  const slides = document.querySelectorAll(".slide");
+  slides.forEach((slide) => {
+    slide.classList.add('paused');
+  });
+}
+
+// Function to resume sliders
+function resumeSliders() {
+  const slides = document.querySelectorAll(".slide");
+  slides.forEach((slide) => {
+    slide.classList.remove('paused');
+  });
+}
+
+// Function to add a comment
+function addComment(commentText) {
+  const commentsList = document.getElementById('commentsList');
+  const comment = document.createElement('div');
+  comment.classList.add('comment');
+  comment.textContent = commentText;
+  commentsList.appendChild(comment);
+}
+const fetchVideos = async (id,type) => {
+  try {
+
+    const res = await fetch(
+      `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=5e5b8093e7d7736405fb91d83905aaab`
+    );
+    const data = await res.json();
+  
+    //construct the URL from youtube
+    return data.results.length > 0
+      ? `https://www.youtube.com/embed/${data.results[0].key}`
+      : "";
+  } catch (error) {
+    console.error("Error fetching video:", error);
+    return "";
+  }
+};
+
+export function initializeModalVideo() {
+  document.addEventListener("click", async (event) => {
+    if (event.target.classList.contains("video-link")) {
+      event.preventDefault();
+
+      const link = event.target;
+      const id = link.dataset.id;
+      const type = link.dataset.type; // 'movie' or 'tv'
+      const videoUrl = await fetchVideos(id, type);
+
+      if (videoUrl) {
+        const modal = document.getElementById('video-modal');
+        const modalVideo = document.getElementById('modal-video');
+        const terminate = document.getElementsByClassName('close')[0];
+
+        modalVideo.src = `${videoUrl}?autoplay=1`;
+        modal.style.display = "block";
+
+        // Pause sliders
+        pauseSliders();
+
+        terminate.onclick = function () {
+          modal.style.display = "none";
+          modalVideo.src = "";
+          // Resume sliders
+          resumeSliders();
+        };
+
+        window.onclick = function (event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+            modalVideo.src = "";
+            // Resume sliders
+            resumeSliders();
+          }
+        };
+
+        // Handle comment submission
+        const submitCommentButton = document.getElementById('submitComment');
+        submitCommentButton.onclick = function () {
+          const commentInput = document.getElementById('commentInput');
+          const commentText = commentInput.value.trim();
+          if (commentText) {
+            addComment(commentText);
+            commentInput.value = '';
+          }
+        };
+      }
+    }
+  });
+}
 
 document.addEventListener("DOMContentLoaded", async () => {
   const genreList = {
@@ -226,23 +319,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   };
 
-  const fetchVideos = async (id,type) => {
-    try {
-  
-      const res = await fetch(
-        `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=5e5b8093e7d7736405fb91d83905aaab`
-      );
-      const data = await res.json();
-    
-      //construct the URL from youtube
-      return data.results.length > 0
-        ? `https://www.youtube.com/embed/${data.results[0].key}`
-        : "";
-    } catch (error) {
-      console.error("Error fetching video:", error);
-      return "";
-    }
-  };
+
 
   const generateSlides = async () => {
     const movies = await fetchMovies();
@@ -288,48 +365,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Inject slides into DOM
     slideContainer.innerHTML = slidesHTML.join("");
     thumbnailSlider.innerHTML = slidesHTML.join("");
-  
-    // Add event listeners for play icons
-    document.addEventListener("click", async (event) => {
-      if (event.target.classList.contains("video-link")) {
-        event.preventDefault();
-  
-        const link = event.target;
-        const id = link.dataset.id;
-        const type = link.dataset.type; // 'movie' or 'tv'
-        const videoUrl = await fetchVideos(id, type);
-  
-        if (videoUrl) {
-          const contentDiv = link.closest(".content");
-          const videoContainer = contentDiv.querySelector(".video-container");
-          const iframe = videoContainer.querySelector("iframe");
-  
-          iframe.src = videoUrl;
-          videoContainer.style.display = "block"; // Show the iframe
-          contentDiv
-            .querySelectorAll(":scope > *:not(.video-container)")
-            .forEach((child) => {
-              child.style.display = "none"; // Hide all other children
-            });
-        }
-      }
-    });
-  
-    // Close button to restore the original state
-    document.addEventListener("click", (event) => {
-      if (event.target.classList.contains("close-video")) {
-        const videoContainer = event.target.closest(".video-container");
-        const iframe = videoContainer.querySelector("iframe");
-        iframe.src = ""; // Stop the video
-        videoContainer.style.display = "none"; // Hide the iframe
-  
-        const contentDiv = videoContainer.closest(".content");
-        contentDiv.querySelectorAll(":scope > *").forEach((child) => {
-          child.style.display = ""; // Restore visibility of all children
-        });
-      }
-    });
+
+    initializeModalVideo();
+
+
   };
+  
   // Categories
   const displayVideos = async () => {
     const container = document.getElementById("categories-container");
