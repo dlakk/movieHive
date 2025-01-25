@@ -25,20 +25,46 @@
         </nav>
       </div>
       <div class="nav-right">
-        <form action="search.html" method="post" class="search-container" id="serch-form">
-          <input type="text" id="search-input" placeholder="movies or person...">
-  
-            <a href="">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </a>
-            <div id="suggestions"></div>
-        </form>    
+        <form
+          action="search.html"
+          method="post"
+          class="search-container"
+          id="serch-form"
+        >
+          <input
+            type="text"
+            id="search-input"
+            placeholder="movies or person..."
+          />
+
+          <a href="">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </a>
+          <div id="suggestions"></div>
+        </form>
         <button id="auth" class="auth">Sighn up</button>
       </div>
     </header>
     <!-- header end  -->
 
     <!-- main section -->
+     <!-- modal -->
+     <div id="video-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <iframe
+          src=""
+          frameborder="0"
+          id="modal-video"
+          width="100%"
+          height="90%"
+          allow="autoplay"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  
+    <!-- modal end -->
     <div id="movie-details-container">
       <div class="movie-details">
         <img id="movie-poster" alt="Movie Poster" />
@@ -55,33 +81,9 @@
             <ul id="movie-genres"></ul>
             <p id="movie-time"></p>
           </div>
-          <div class="movie-preference">
-            <i class="fa-solid fa-list icons" title="Add to list"></i>
-            <i class="fa-solid fa-heart icons" title="Mark as favourite"></i>
-            <i class="fa-solid fa-bookmark icons" title="Add to watchlist"></i>
-            <i class="fa-solid fa-play icons"></i><span>Play Trailer</span>
-            <!-- modal -->
-            <!-- <div id="video-modal" class="modal">
-              <div class="modal-content">
-                <span class="close">&times;</span>
-                <iframe
-                  src=""
-                  frameborder="0"
-                  id="modal-video"
-                  width="100%"
-                  height="90%"
-                  allow="autoplay"
-                  allowfullscreen
-                ></iframe>
-                <div id="commentSection">
-                <h3>Your opinions</h3>
-                <div class="comments"><textearea id="commentInput" aria-placeholder="Add a comment"></textearea>
-                <button type="submit" id="submitComment">Post</button>
-                </div>
-                
-              </div>
-            </div>
-          </div> -->
+          <div class="movie-preference"></div>
+            
+            
           <div class="movie-overview">
             <h2>overview</h2>
             <hr />
@@ -122,7 +124,7 @@
               data-tooltip="Visit Twitter"
               target="_blank"
             >
-            <i class="fa-brands fa-x-twitter icons"></i>
+              <i class="fa-brands fa-x-twitter icons"></i>
             </a>
             <a
               href="#"

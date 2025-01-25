@@ -17,6 +17,22 @@ body {
 
   overflow-x: hidden;
 }
+body::-webkit-scrollbar {
+  width: 12px;
+}
+body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 8px;
+  
+}
+body::-webkit-scrollbar-thumb {
+  background: #e65f5f;
+  border-radius: 6px;
+  cursor: pointer;
+}
+body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #ff9a9e, #ec6161);
+} 
 /* General Styles */
 header {
   width: 100vw;
@@ -26,7 +42,7 @@ header {
   justify-content: space-between;
   background-color: rgba(0, 0, 0, 0.349);
   position: relative;
-  z-index: 100;
+  z-index: 2;
   font-size: 18px;
   padding: 30px;
 }
@@ -182,120 +198,6 @@ header {
   transition: 0.8s;
 }
 
-/* Responsive Styles */
-@media screen and (max-width: 768px) {
-  header {
-    justify-content: space-between;
-    height: auto;
-    padding: 10px;
-    font-size: 15px;
-  }
-
-  .nav-left,
-  .nav-right {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  .nav-left {
-    display: block;
-    gap: 1;
-    margin: 0;
-    padding: 0;
-  }
-  .nav-left h2 {
-    margin: 0 0 -20px 20px;
-  }
-
-  .nav-bar ul {
-    margin-top: -30px;
-    margin: 0;
-    align-items: flex-start;
-    gap: 10px;
-  }
-  .nav-right {
-    display: flex;
-    justify-content: flex-end;
-    overflow: hidden;
-    height: 50px;
-  }
-
-  .search-container {
-    width: auto;
-    position: relative;
-  }
-
-  .search-container input {
-    width: 0;
-    outline: 0;
-    border: 0;
-    font-size: 13px;
-    font-weight: bold;
-    transition: width 0.8s ease;
-    color: black;
-    background: #fff;
-  }
-
-  .search-container:hover input {
-    width: 150px;
-  }
-
-  #suggestions {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    width: 150px;
-  }
-
-  .search-container:hover #suggestions {
-    display: block;
-  }
-
-  .auth {
-    width: auto;
-    height: auto;
-    padding: 10px 20px;
-    font-size: 13px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  header {
-    padding: 5px;
-  }
-
-  .nav-left h2 {
-    font-size: 13px;
-  }
-
-  .nav-bar ul {
-    gap: 5px;
-  }
-
-  .nav-bar ul li a {
-    font-size: 12px;
-    margin-right: 5px;
-  }
-
-  .search-container {
-    width: auto;
-    padding: 5px 10px;
-  }
-
-  .search-container input {
-    width: 100%;
-    font-size: 11px;
-  }
-
-  .auth {
-    width: auto;
-    font-size: 12px;
-  }
-}
-
 /* End of Navigation */
 
 /* Hero section */
@@ -310,7 +212,7 @@ header {
   position: relative;
   width: 100vw;
   height: 100vh;
-  z-index: 1;
+  /* z-index: 1; */
 }
 #hero-slide .slide::before {
   content: "";
@@ -320,7 +222,7 @@ header {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.4);
-  z-index: 2;
+  z-index: 1;
 }
 #hero-slide .slide img {
   width: 100%;
@@ -340,7 +242,7 @@ header {
   padding-left: 30px;
   box-shadow: 0 5px 10px #0004;
   margin: 20px;
-  z-index: 4;
+  z-index: 1;
 }
 #hero-slide .slide .content .title {
   background-color: rgba(0, 0, 0, 0.151);
@@ -412,7 +314,7 @@ header {
   bottom: 10px;
   left: 50%;
   width: max-content;
-  z-index: 100;
+  z-index: 1;
   display: flex;
   gap: 20px;
 }
@@ -442,34 +344,49 @@ header {
 .modal {
   display: none;
   position: fixed;
-  z-index: 10000;
+  z-index: 2;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
   background-color: rgba(0, 0, 0, 0.8);
 }
 .modal-content {
-  background-color: #fefefe;
+  background-color: #e70e0e;
   margin: 5% auto;
   padding: 20px;
-  border: 1px solid #888;
+  border: 1px solid black;
   box-shadow: 0 4px 8px rgba(23, 90, 89, 0.1);
   border-radius: 20px;
   width: 80%;
-  height: 90vh;
+  height: 85vh;
+  animation: whiteGlow 1s infinite  alternate;
+}
+@keyframes whiteGlow {
+  from{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  to{
+    box-shadow: 0 0 20px #dbdadb,
+    0 0 30px #c9c6c7,
+    0 0 40px #f8f6f7;
+  }
 }
 
+iframe{
+  border-radius: 20px;
+  
+}
 .close {
-  color: #aaa;
+  color: black;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
 .close:hover,
 .close:focus {
-  color: black;
+  color: rgb(253, 252, 252);
   text-decoration: none;
   cursor: pointer;
 }
@@ -479,7 +396,7 @@ header {
   position: absolute;
   top: 80%;
   right: 52%;
-  z-index: 100;
+  z-index: 1;
   width: 300px;
   max-width: 30%;
   display: flex;
@@ -496,7 +413,7 @@ header {
   font-family: monospace;
   font-weight: bold;
   transition: 0.5s;
-  z-index: 100;
+  /* z-index: 100; */
 }
 .icon-nav {
   cursor: pointer;

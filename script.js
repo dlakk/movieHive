@@ -113,30 +113,7 @@ export function login() {
     });
   }
 }
-// function to pause sliders
-function pauseSliders() {
-  const slides = document.querySelectorAll(".slide");
-  slides.forEach((slide) => {
-    slide.classList.add('paused');
-  });
-}
 
-// Function to resume sliders
-function resumeSliders() {
-  const slides = document.querySelectorAll(".slide");
-  slides.forEach((slide) => {
-    slide.classList.remove('paused');
-  });
-}
-
-// Function to add a comment
-function addComment(commentText) {
-  const commentsList = document.getElementById('commentsList');
-  const comment = document.createElement('div');
-  comment.classList.add('comment');
-  comment.textContent = commentText;
-  commentsList.appendChild(comment);
-}
 const fetchVideos = async (id,type) => {
   try {
 
@@ -154,15 +131,30 @@ const fetchVideos = async (id,type) => {
     return "";
   }
 };
+// Function to pause sliders
+function pauseSliders() {
+  const slides = document.querySelectorAll(".slide");
+  slides.forEach((slide) => {
+    slide.classList.add('paused');
+  });
+}
+
+// Function to resume sliders
+function resumeSliders() {
+  const slides = document.querySelectorAll(".slide");
+  slides.forEach((slide) => {
+    slide.classList.remove('paused');
+  });
+}
 
 export function initializeModalVideo() {
   document.addEventListener("click", async (event) => {
-    if (event.target.classList.contains("video-link")) {
+    if (event.target.classList.contains("video-link") || event.target.classList.contains("fa-play")) {
       event.preventDefault();
 
-      const link = event.target;
+      const link = event.target.closest('.video-link') || event.target;
       const id = link.dataset.id;
-      const type = link.dataset.type; // 'movie' or 'tv'
+      const type = link.dataset.type || 'movie'; // 'movie' or 'tv'
       const videoUrl = await fetchVideos(id, type);
 
       if (videoUrl) {
@@ -191,21 +183,11 @@ export function initializeModalVideo() {
             resumeSliders();
           }
         };
-
-        // Handle comment submission
-        const submitCommentButton = document.getElementById('submitComment');
-        submitCommentButton.onclick = function () {
-          const commentInput = document.getElementById('commentInput');
-          const commentText = commentInput.value.trim();
-          if (commentText) {
-            addComment(commentText);
-            commentInput.value = '';
-          }
-        };
       }
     }
   });
 }
+
 
 document.addEventListener("DOMContentLoaded", async () => {
   const genreList = {
@@ -366,9 +348,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     slideContainer.innerHTML = slidesHTML.join("");
     thumbnailSlider.innerHTML = slidesHTML.join("");
 
-    initializeModalVideo();
-
-
+  initializeModalVideo();
   };
   
   // Categories

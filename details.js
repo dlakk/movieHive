@@ -5,6 +5,17 @@ import {
   login,
   initializeModalVideo
 } from "./script.js";
+function generatePreferences(contentId, contentType) {
+  const preferencesHTML = `
+    <i class="fa-solid fa-list icons" title="Add to list"></i>
+    <i class="fa-solid fa-heart icons" title="Mark as favourite"></i>
+    <i class="fa-solid fa-bookmark icons" title="Add to watchlist"></i>
+    <i class="fa-solid fa-play icons video-link" data-id="${contentId}" data-type="${contentType}"></i><span>Play Trailer</span>
+  `;
+
+  const moviePreferenceContainer = document.querySelector('.movie-preference');
+  moviePreferenceContainer.innerHTML = preferencesHTML;
+}
 
 document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("search-input").addEventListener("input", (e) => {
@@ -28,6 +39,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     movieDetailsContainer.innerHTML = "<p>content ID  or type not found.</p>";
     return;
   }
+
+   // Generate preferences
+   generatePreferences(contentId, contentType);
 
   // Fetch content Details
   const apiUrl =
