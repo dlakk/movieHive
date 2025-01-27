@@ -50,7 +50,7 @@ header {
 .nav-left {
   display: flex;
   align-items: center;
-  gap: 0px;
+  justify-content: space-between;
 }
 
 .nav-left h2 {
@@ -88,6 +88,7 @@ header {
   align-items: center;
   gap: 10px;
 }
+
 
 .search-container {
   height: 30px;
@@ -196,6 +197,18 @@ header {
   color: #ece8e8f5;
   background: rgba(235, 10, 10, 0.884);
   transition: 0.8s;
+}
+.menu-icons{
+  display: none;
+
+}
+#hamburger-icon{
+  display: block;
+  cursor: pointer;
+}
+#close-icon{
+  display: none;
+  cursor: pointer;
 }
 
 /* End of Navigation */
@@ -565,40 +578,6 @@ iframe{
     width: 0;
   }
 }
-@media screen and (max-width: 678px) {
-  .hero-section #hero-slide .slide .content {
-    top: 10%;
-    left: 40%;
-  }
-  .hero-section #hero-slide .slide .content .title {
-    font-size: 24px;
-    letter-spacing: 2px;
-  }
-  .hero-section #hero-slide .slide .overview {
-    font-size: 16px;
-  }
-}
-@media screen and (max-width: 480px) {
-  .hero-section #hero-slide .slide .content {
-    top: 15%;
-    left: 40%;
-  }
-  .hero-section #hero-slide .slide .content .title {
-    font-size: 21px;
-    letter-spacing: 1px;
-  }
-  .hero-section #hero-slide .slide .content .genre {
-    font-size: 12px;
-  }
-  .hero-section #hero-slide .slide .overview {
-    font-size: 14px;
-  }
-  .hero-section #hero-slide .slide .content .trailer {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-  }
-}
 
 /* movie category */
 
@@ -770,13 +749,44 @@ iframe{
   font-weight: 400;
   margin: 0px 5px;
 }
-@media (max-width: 700px) {
-  .footer-nav ul {
-    flex-direction: column;
+/* Responsiveness */
+@media screen and (max-width: 768px){
+  .menu-icons{
+    display: block;
   }
-  .footer-nav ul li {
-    width: 100%;
-    text-align: center;
-    margin: 10px;
+  .nav-bar ul{
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s tansform 0.3s ease;
+  }
+  .nav-bar ul li {
+    margin: 10px 0;
+  }
+ .nav-bar.active ul {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .nav-bar.active #hamburger-icon {
+    display: none;
+  }
+
+  .nav-bar.active #close-icon {
+    display: block;
+  }
+  #close-icon {
+    
+    cursor: pointer;
+    font-size: 24px;
   }
 }

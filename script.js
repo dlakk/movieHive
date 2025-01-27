@@ -231,6 +231,22 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
   login();
+  const hamburgerIcon = document.getElementById("hamburger-icon");
+  const closeIcon = document.getElementById("close-icon");
+  const navBar = document.querySelector(".nav-bar");
+
+  hamburgerIcon.addEventListener("click", () => {
+    navBar.classList.add("active");
+  
+
+  });
+
+  closeIcon.addEventListener("click", () => {
+    navBar.classList.remove("active");
+    
+  });
+  
+
   const slideContainer = document.getElementById("hero-slide");
   const thumbnailSlider = document.getElementById("thumbnail-slide");
 
